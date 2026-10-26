@@ -1,0 +1,62 @@
+#
+# Theme configuration
+#
+# Shared:
+#   accent      Fallback for unset icon/text colors
+#   surface     Fallback for unset button background
+#   bg          Application background
+#   divider     Top bar divider
+#   clock       Clock display color
+#
+# Menu switcher:
+#   menu_icon   Circular marker color
+#   menu_txt    Current label color (HOME / EXTRA)
+#
+# Controller:
+#   controller_icon  Controller icon color
+#   controller_on    Status-dot color when on
+#   controller_off   Status-dot color when off
+#
+# Action buttons (continue, search, library, browser, shutdown, exit):
+#   <action>_icon  Icon color
+#   <action>_txt   Label color
+#   <action>_bg    Background color
+#
+# Battery icons (20, 40, 60, 80, 100):
+#   battery_<level>_outer  Outer shell color
+#   battery_<level>_inner  Inner charge color
+#
+# Resolution (highest priority first):
+#   General: theme value > default value
+#   Icon/text: *_icon / *_txt > accent
+#   Buttons: <action>_bg > surface
+#
+
+current: crimson
+
+default:
+  menu_icon: "#94455d"
+  menu_txt: "#c4597b"
+  clock: "#f3e5ea"
+
+  controller_icon: "#f3e5ea"
+  controller_on: "#63d69a"
+  controller_off: "#d66363"
+
+  battery_20_outer: "#f5a3b1"
+  battery_20_inner: "#e86d75"
+  battery_40_outer: "#f4b8a4"
+  battery_40_inner: "#e88b72"
+  battery_60_outer: "#f0d0a8"
+  battery_60_inner: "#e5b879"
+  battery_80_outer: "#cae1b7"
+  battery_80_inner: "#9fca7d"
+  battery_100_outer: "#ade9ca"
+  battery_100_inner: "#63d69a"
+
+themes:
+  crimson:
+    bg: "#1d1118"
+    divider: "#63303f"
+    accent: "#edabb3"
+    surface: "#321d27"
