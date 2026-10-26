@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/26 11:45:31 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/26 11:49:44 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -43,7 +43,7 @@ App::App(const std::string& svgPath)
 
 void App::initWindow()
 {
-    window_.reset(SDL_CreateWindow("menu", SDL_WINDOWPOS_CENTERED,
+    _window.reset(SDL_CreateWindow("menu", SDL_WINDOWPOS_CENTERED,
                                    SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H,
                                    SDL_WINDOW_RESIZABLE));
     if (!_window)
@@ -55,21 +55,21 @@ void App::initWindow()
 void App::initRenderer()
 {
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
-    renderer_.reset(SDL_CreateRenderer(window_.get(), -1,
+    _renderer.reset(SDL_CreateRenderer(_window.get(), -1,
                                        SDL_RENDERER_ACCELERATED |
                                        SDL_RENDERER_PRESENTVSYNC));
     if (!_renderer)
     {
         throw SdlError("SDL_CreateRenderer");
     }
-    SDL_RenderSetLogicalSize(renderer_.get(), TEX_W, TEX_H);
+    SDL_RenderSetLogicalSize(_renderer.get(), TEX_W, TEX_H);
 }
 
 void App::loadSvg(const std::string& path)
 {
     Svg svg(path);
     std::printf("%s: %.1f x %.1f\n", path.c_str(), svg.width(), svg.height());
-    _texture = svg.toTexture(renderer_.get(), TEX_W, TEX_H);
+    _texture = svg.toTexture(_renderer.get(), TEX_W, TEX_H);
 }
 
 void App::run()
