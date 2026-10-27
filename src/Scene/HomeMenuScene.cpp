@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 21:00:09 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/27 21:29:27 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/27 22:25:12 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -22,18 +22,18 @@ HomeMenuScene::HomeMenuScene(SDL_Renderer* r)
     add(r, "controller/controller_icon.svg", { 1695.00f, 24.57f, 66.71f, 32.13f });
     add(r, "batteries/battery_100.svg",      { 1761.26f, 32.35f, 35.34f, 18.33f });
 
-    // Continue tile
-    add(r, "buttons/continue_bg.svg",  { 150.0f, 390.0f, 450.0f, 300.0f });
-    add(r, "icons/continue_icon.svg",  { 344.8f, 442.9f, 60.5f,  60.5f });
-    add(r, "buttons/continue_txt.svg", { 250.0f, 567.2f, 250.0f, 49.1f });
-
     // Search tile
-    add(r, "buttons/search_bg.svg",  { 735.0f, 390.0f, 450.0f, 300.0f });
-    add(r, "icons/search_icon.svg",  { 929.8f, 442.9f, 60.5f,  60.5f });
-    add(r, "buttons/search_txt.svg", { 875.0f, 567.2f, 170.0f, 49.1f });
+    add(r, "buttons/search_bg.svg",  { 150.0f, 390.0f, 450.0f, 300.0f });
+    add(r, "icons/search_icon.svg",  { 344.8f, 442.9f, 60.5f,  60.5f });
+    add(r, "buttons/search_txt.svg", { 319.0f, 567.2f, 112.0f, 30.0f });
+
+    // Continue tile
+    add(r, "buttons/continue_bg.svg",  { 735.0f, 390.0f, 450.0f, 300.0f });
+    add(r, "icons/continue_icon.svg",  { 929.8f, 442.9f, 60.5f,  60.5f });
+    add(r, "buttons/continue_txt.svg", { 880.75f, 567.2f, 158.5f, 30.0f });
 
     // Library tile
     add(r, "buttons/library_bg.svg",  { 1320.0f, 390.0f, 450.0f, 300.0f });
-    add(r, "icons/library_icon.svg",  { 1514.8f, 442.9f, 60.5f,  60.5f });
-    add(r, "buttons/library_txt.svg", { 1450.0f, 567.2f, 190.0f, 49.1f });
+    add(r, "icons/library_icon.svg", { 1520.05f, 448.15f, 50.0f, 50.0f });
+    add(r, "buttons/library_txt.svg", { 1486.5f, 567.2f, 117.0f, 40.0f });
 }

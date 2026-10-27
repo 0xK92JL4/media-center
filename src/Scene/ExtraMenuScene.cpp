@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 21:04:05 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/27 21:28:32 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/27 22:28:24 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -25,15 +25,15 @@ ExtraMenuScene::ExtraMenuScene(SDL_Renderer* r)
     // Browser tile
     add(r, "buttons/browser_bg.svg",  { 150.0f, 390.0f, 450.0f, 300.0f });
     add(r, "icons/browser_icon.svg",  { 344.8f, 442.9f, 60.5f,  60.5f });
-    add(r, "buttons/browser_txt.svg", { 280.0f, 567.2f, 190.0f, 49.1f });
+    add(r, "buttons/browser_txt.svg", { 302.75f, 567.2f, 144.5f, 30.0f });
 
     // Shutdown tile
     add(r, "buttons/shutdown_bg.svg",  { 735.0f, 390.0f, 450.0f, 300.0f });
     add(r, "icons/shutdown_icon.svg",  { 929.8f, 442.9f, 60.5f,  60.5f });
-    add(r, "buttons/shutdown_txt.svg", { 845.0f, 567.2f, 230.0f, 49.1f });
+    add(r, "buttons/shutdown_txt.svg", { 873.5f, 567.2f, 173.0f, 30.0f });
 
     // Exit tile
     add(r, "buttons/exit_bg.svg",  { 1320.0f, 390.0f, 450.0f, 300.0f });
     add(r, "icons/exit_icon.svg",  { 1514.8f, 442.9f, 60.5f,  60.5f });
-    add(r, "buttons/exit_txt.svg", { 1480.0f, 567.2f, 130.0f, 49.1f });
+    add(r, "buttons/exit_txt.svg", { 1516.0f, 567.2f, 58.0f,  30.0f });
 }
