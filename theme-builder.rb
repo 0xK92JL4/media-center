@@ -216,7 +216,14 @@ class ThemeBuilder
       "constexpr unsigned #{key.upcase}_COLOR = 0x#{color.delete_prefix('#').downcase};"
     end
 
-    ["#pragma once", "", "// generated, theme: #{name}", *lines, ""].join("\n")
+    [
+      "#pragma once",
+      "",
+      "// generated, theme: #{name}",
+      "constexpr const char* THEME_NAME = \"#{name}\";",
+      *lines,
+      ""
+    ].join("\n")
   end
 end
 
