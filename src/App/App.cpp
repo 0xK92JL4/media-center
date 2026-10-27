@@ -5,13 +5,15 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/26 11:49:44 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/27 21:19:25 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
 #include "App.h"
+#include "Theme.h"
 
-#include <cstdio>
+#include "Scene/HomeMenuScene.h"
+#include "Scene/ExtraMenuScene.h"
 
 namespace
 {
@@ -34,11 +36,11 @@ App::SdlContext::~SdlContext()
     SDL_Quit();
 }
 
-App::App(const std::string& svgPath)
+App::App(int menu)
 {
     initWindow();
     initRenderer();
-    loadSvg(svgPath);
+    loadScene(menu);
 }
 
 void App::initWindow()
@@ -65,11 +67,18 @@ void App::initRenderer()
     SDL_RenderSetLogicalSize(_renderer.get(), TEX_W, TEX_H);
 }
 
-void App::loadSvg(const std::string& path)
+void App::loadScene(int menu)
 {
-    Svg svg(path);
-    std::printf("%s: %.1f x %.1f\n", path.c_str(), svg.width(), svg.height());
-    _texture = svg.toTexture(_renderer.get(), TEX_W, TEX_H);
+    if (menu == 1)
+        _scene = std::make_unique<HomeMenuScene>(_renderer.get());
+    else
+        _scene = std::make_unique<ExtraMenuScene>(_renderer.get());
+}
+
+void App::setColor(unsigned rgb) const
+{
+    SDL_SetRenderDrawColor(_renderer.get(),
+                           (rgb >> 16) & 0xff, (rgb >> 8) & 0xff, rgb & 0xff, 255);
 }
 
 void App::run()
@@ -104,9 +113,8 @@ void App::update()
 
 void App::draw()
 {
-    SDL_Renderer* r = _renderer.get();
-    SDL_SetRenderDrawColor(r, 0, 0, 0, 255);
-    SDL_RenderClear(r);
-    SDL_RenderCopy(r, _texture.get(), nullptr, nullptr);
-    SDL_RenderPresent(r);
+    setColor(BG_COLOR);
+    SDL_RenderClear(_renderer.get());
+    _scene->draw(_renderer.get());
+    SDL_RenderPresent(_renderer.get());
 }

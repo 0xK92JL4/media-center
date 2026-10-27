@@ -5,15 +5,15 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:40 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/26 11:45:41 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/27 21:15:28 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
 #pragma once
 
+#include "Scene/Scene.h"
 #include "Sdl.h"
-#include "Svg.h"
-#include <string>
+#include <memory>
 
 class App
 {
@@ -28,20 +28,21 @@ class App
 
 		void initWindow();
 		void initRenderer();
-		void loadSvg(const std::string& path);
+		void loadScene(int menu);
+		void setColor(unsigned rgb) const;
 
 		void events();
 		void update();
 		void draw();
 
-		SdlContext  _sdl;
-		WindowPtr   _window;
-		RendererPtr _renderer;
-		TexturePtr  _texture;
-		bool        _running = true;
+		SdlContext             _sdl;
+		WindowPtr              _window;
+		RendererPtr            _renderer;
+		std::unique_ptr<Scene> _scene;
+		bool                   _running = true;
 
 	public:
-		explicit App(const std::string& svgPath);
+		explicit App(int menu);
 
 		void run();
 };

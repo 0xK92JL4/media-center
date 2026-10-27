@@ -5,22 +5,23 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:47 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/26 11:45:49 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/27 21:15:12 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
-#include "App.h"
+#include "App/App.h"
 
 #include <cstdio>
+#include <cstdlib>
 #include <exception>
 
 int main(int argc, char** argv)
 {
-    const char* path = argc > 1 ? argv[1] : "build/menu/menu_home.svg";
+    int menu = argc > 1 ? std::atoi(argv[1]) : 1;
 
     try
     {
-        App app(path);
+        App app(menu);
         app.run();
     }
     catch (const std::exception& e)
