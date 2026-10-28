@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/28 11:55:54 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 13:39:49 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 14:30:51 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -56,12 +56,15 @@ void Clock::update()
 
 void Clock::draw(SDL_Renderer* r) const
 {
+    const int startX = 1920 / 2 - (5 * _cell) / 2;
+
     int i = 0;
     for (char c : _text)
     {
         const int g = (c == ':') ? 10 : c - '0';
         const SDL_Rect src = { g * _cell, 0, _cell, _th };
-        const SDL_Rect dst = { _x + i * _cell, _y, _cell, _th };
+        const SDL_Rect dst = { startX + i * _cell, _y, _cell, _th };
+
         SDL_RenderCopy(r, _tex.get(), &src, &dst);
         ++i;
     }
