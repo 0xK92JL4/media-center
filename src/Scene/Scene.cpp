@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 20:36:38 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/27 21:22:49 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 12:16:52 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -58,15 +58,20 @@ void Scene::add(SDL_Renderer* r,
     });
 }
 
+void Scene::addClock(SDL_Renderer* r, const Box& b)
+{
+    _clock = std::make_unique<Clock>(r, asset("common/clock.svg"),
+            b.x, b.y, b.w, b.h);
+}
+
 void Scene::draw(SDL_Renderer* r) const
 {
     for (const Sprite& sprite : _sprites)
     {
-        SDL_RenderCopy(
-            r,
-            sprite.tex.get(),
-            nullptr,
-            &sprite.dst
-        );
+        SDL_RenderCopy(r, sprite.tex.get(), nullptr, &sprite.dst);
+    }
+    if (_clock)
+    {
+        _clock->draw(r);
     }
 }

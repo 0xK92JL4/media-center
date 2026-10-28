@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 21:04:05 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/27 22:28:24 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 11:58:28 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -17,10 +17,11 @@ ExtraMenuScene::ExtraMenuScene(SDL_Renderer* r)
     add(r, "common/divider.svg",             { 48.0f,    80.0f,  1824.0f, 10.0f });
     add(r, "menu/menu_icon.svg",             { 116.2f,   33.1f,  23.2f,   23.2f });
     add(r, "menu/menu_extra.svg",            { 154.3f,   33.0f,  105.0f,  23.8f });
-    add(r, "common/clock.svg",               { 924.5f,   33.6f,  90.7f,   23.2f });
     add(r, "controller/controller_on.svg",   { 1666.77f, 35.45f, 12.51f,  12.51f });
     add(r, "controller/controller_icon.svg", { 1695.00f, 24.57f, 66.71f,  32.13f });
     add(r, "batteries/battery_100.svg",      { 1761.26f, 32.35f, 35.34f,  18.33f });
+
+    addClock(r, { 924.5f, 33.6f, 90.7f, 23.2f });
 
     // Browser tile
     add(r, "buttons/browser_bg.svg",  { 150.0f, 390.0f, 450.0f, 300.0f });
