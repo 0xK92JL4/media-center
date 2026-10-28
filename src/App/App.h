@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:40 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/27 21:15:28 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 23:13:04 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -35,6 +35,7 @@ class App
 		void update();
 		void draw();
 
+        int                    _menu = 1;
 		SdlContext             _sdl;
 		WindowPtr              _window;
 		RendererPtr            _renderer;

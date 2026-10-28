@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 14:45:06 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 23:14:48 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -69,10 +69,15 @@ void App::initRenderer()
 
 void App::loadScene(int menu)
 {
+    std::unique_ptr<Scene> next;
+
     if (menu == 1)
-        _scene = std::make_unique<HomeMenuScene>(_renderer.get());
+        next = std::make_unique<HomeMenuScene>(_renderer.get());
     else
-        _scene = std::make_unique<ExtraMenuScene>(_renderer.get());
+        next = std::make_unique<ExtraMenuScene>(_renderer.get());
+
+    _scene = std::move(next);
+    _menu  = menu;
 }
 
 void App::setColor(unsigned rgb) const
@@ -103,6 +108,14 @@ void App::events()
         else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
         {
             _running = false;
+        }
+        else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+        {
+            if (_scene->hitToggle(e.button.x, e.button.y))
+            {
+                loadScene(_menu == 1 ? 2 : 1);
+                break;
+            }
         }
     }
 }

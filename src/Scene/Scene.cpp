@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 20:36:38 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 14:07:43 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 23:17:16 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -56,6 +56,22 @@ void Scene::add(SDL_Renderer* r,
         svg.toTexture(r, pw, ph),
         dst
     });
+}
+
+void Scene::setToggle(const Box& b)
+{
+    _toggleMenu = {
+        static_cast<int>(std::lround(b.x)),
+        static_cast<int>(std::lround(b.y)),
+        static_cast<int>(std::lround(b.w)),
+        static_cast<int>(std::lround(b.h))
+    };
+}
+
+bool Scene::hitToggle(int x, int y) const
+{
+    const SDL_Point p = { x, y };
+    return SDL_PointInRect(&p, &_toggleMenu);
 }
 
 void Scene::addClock(SDL_Renderer* r, const Box& b)
