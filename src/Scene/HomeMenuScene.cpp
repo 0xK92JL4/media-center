@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 21:00:09 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 23:12:01 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 23:24:05 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -39,5 +39,5 @@ HomeMenuScene::HomeMenuScene(SDL_Renderer* r)
     add(r, "buttons/library_txt.svg", { 1486.5f, 567.2f, 117.0f, 40.0f });
 
     // Toggle Menu Button
-    setToggle({ 110.0f, 24.0f, 135.0f, 40.0f });
+    setToggle({ 100.0f, 14.0f, 145.0f, 60.0f });
 }

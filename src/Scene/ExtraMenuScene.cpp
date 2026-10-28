@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 21:04:05 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 23:12:18 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 23:24:25 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -39,5 +39,5 @@ ExtraMenuScene::ExtraMenuScene(SDL_Renderer* r)
     add(r, "buttons/exit_txt.svg", { 1516.0f, 567.2f, 58.0f,  30.0f });
 
     // Toggle Menu Button
-    setToggle({ 110.0f, 24.0f, 155.0f, 40.0f });
+    setToggle({ 100.0f, 14.0f, 165.0f, 60.0f });
 }
