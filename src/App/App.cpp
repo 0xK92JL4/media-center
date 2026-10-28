@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 14:08:31 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 14:45:06 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -17,8 +17,8 @@
 
 namespace
 {
-    constexpr int WINDOW_W = 1280;
-    constexpr int WINDOW_H = 720;
+    constexpr int WINDOW_W = 1920;
+    constexpr int WINDOW_H = 1080;
     constexpr int TEX_W    = 1920;
     constexpr int TEX_H    = 1080;
 }
