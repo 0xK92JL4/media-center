@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/28 11:55:54 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 12:17:12 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 13:39:49 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -23,12 +23,13 @@ Clock::Clock(SDL_Renderer* r, const std::string& file,
     Svg svg(file);
 
     const float cell  = svg.width() / GLYPHS;
-    const float scale = std::min(w / (5 * cell), h / svg.height());
+    const float fit   = std::min(w / (5 * cell), h / svg.height());
 
-    _cell = std::max(1, static_cast<int>(std::lround(cell * scale)));
-    _h    = std::max(1, static_cast<int>(std::lround(svg.height() * scale)));
+    _cell = std::max(1, static_cast<int>(std::lround(cell * fit)));
+    const float scale = _cell / cell;
 
-    _tex = svg.toTexture(r, _cell * GLYPHS, _h);
+    _th = std::max(1, static_cast<int>(std::ceil(svg.height() * scale)));
+    _tex = svg.toTexture(r, _cell * GLYPHS, _th, scale);
     refresh();
 }
 
@@ -59,8 +60,8 @@ void Clock::draw(SDL_Renderer* r) const
     for (char c : _text)
     {
         const int g = (c == ':') ? 10 : c - '0';
-        const SDL_Rect src = { g * _cell, 0, _cell, _h };
-        const SDL_Rect dst = { _x + i * _cell, _y, _cell, _h };
+        const SDL_Rect src = { g * _cell, 0, _cell, _th };
+        const SDL_Rect dst = { _x + i * _cell, _y, _cell, _th };
         SDL_RenderCopy(r, _tex.get(), &src, &dst);
         ++i;
     }

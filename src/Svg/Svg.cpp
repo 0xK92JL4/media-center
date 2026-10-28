@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:46:02 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/27 20:13:23 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 12:26:14 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -52,6 +52,11 @@ float Svg::height() const
 
 TexturePtr Svg::toTexture(SDL_Renderer* renderer, int w, int h) const
 {
+    return toTexture(renderer, w, h, static_cast<float>(w) / _image->width);
+}
+
+TexturePtr Svg::toTexture(SDL_Renderer* renderer, int w, int h, float scale) const
+{
     std::unique_ptr<NSVGrasterizer, RastDel> rast(nsvgCreateRasterizer());
     if (!rast)
     {
@@ -59,7 +64,6 @@ TexturePtr Svg::toTexture(SDL_Renderer* renderer, int w, int h) const
     }
 
     std::vector<unsigned char> px(static_cast<size_t>(w) * h * 4);
-    float scale = static_cast<float>(w) / _image->width;
     nsvgRasterize(rast.get(), _image.get(), 0, 0, scale, px.data(), w, h, w * 4);
 
     TexturePtr tex(SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32,

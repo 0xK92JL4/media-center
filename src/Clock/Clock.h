@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/28 11:49:39 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 11:55:31 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/28 13:39:12 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -17,23 +17,23 @@
 
 class Clock
 {
-	private:
-		static constexpr int GLYPHS = 11;
+    private:
+        static constexpr int GLYPHS = 11;
 
-		void refresh();
+        void refresh();
 
-		TexturePtr  _tex;
-		int         _cell = 0;
-		int         _h    = 0;
-		int         _x    = 0;
-		int         _y    = 0;
-		std::string _text;
-		std::time_t _last = 0;
+        TexturePtr  _tex;
+        int         _cell = 0;
+        int         _th   = 0;
+        int         _x    = 0;
+        int         _y    = 0;
+        std::string _text;
+        std::time_t _last = 0;
 
-	public:
-		Clock(SDL_Renderer* r, const std::string& file,
-		      float x, float y, float w, float h);
+    public:
+        Clock(SDL_Renderer* r, const std::string& file,
+                float x, float y, float w, float h);
 
-		void update();
-		void draw(SDL_Renderer* r) const;
+        void update();
+        void draw(SDL_Renderer* r) const;
 };
