@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 20:36:29 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 23:16:48 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/29 11:09:15 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -17,6 +17,14 @@
 #include <string>
 #include <vector>
 
+enum class Action
+{
+    None,
+    ToggleMenu,
+    Search, Continue, Library,
+    Browser, Shutdown, Exit
+};
+
 class Scene
 {
     private:
@@ -26,7 +34,13 @@ class Scene
             SDL_Rect dst;
         };
 
-        SDL_Rect _toggleMenu = { 0, 0, 0, 0 };
+        struct Button
+        {
+            SDL_Rect rect;
+            Action   action;
+        };
+
+        std::vector<Button> _buttons;
         std::vector<Sprite> _sprites;
         std::unique_ptr<Clock> _clock;
 
@@ -36,14 +50,14 @@ class Scene
             float x, y, w, h;
         };
 
-        void setToggle(const Box& box);
+        void addButton(const Box& box, Action action);
         void add(SDL_Renderer* renderer, const std::string& file, const Box& box);
         void addClock(SDL_Renderer* renderer, const Box& box);
 
     public:
         virtual ~Scene() = default;
 
-        bool hitToggle(int x, int y) const;
+        Action hit(int x, int y) const;
         void update();
         void draw(SDL_Renderer* renderer) const;
 };

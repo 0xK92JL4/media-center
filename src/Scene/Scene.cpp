@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 20:36:38 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 23:17:16 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/29 11:09:59 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -58,20 +58,28 @@ void Scene::add(SDL_Renderer* r,
     });
 }
 
-void Scene::setToggle(const Box& b)
+void Scene::addButton(const Box& b, Action action)
 {
-    _toggleMenu = {
-        static_cast<int>(std::lround(b.x)),
-        static_cast<int>(std::lround(b.y)),
-        static_cast<int>(std::lround(b.w)),
-        static_cast<int>(std::lround(b.h))
-    };
+    _buttons.push_back(Button{
+        {
+            static_cast<int>(std::lround(b.x)),
+            static_cast<int>(std::lround(b.y)),
+            static_cast<int>(std::lround(b.w)),
+            static_cast<int>(std::lround(b.h))
+        },
+        action
+    });
 }
 
-bool Scene::hitToggle(int x, int y) const
+Action Scene::hit(int x, int y) const
 {
     const SDL_Point p = { x, y };
-    return SDL_PointInRect(&p, &_toggleMenu);
+    for (const Button& b : _buttons)
+    {
+        if (SDL_PointInRect(&p, &b.rect))
+            return b.action;
+    }
+    return Action::None;
 }
 
 void Scene::addClock(SDL_Renderer* r, const Box& b)

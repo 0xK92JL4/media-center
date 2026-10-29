@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:40 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 23:13:04 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/29 11:16:34 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -31,6 +31,7 @@ class App
 		void loadScene(int menu);
 		void setColor(unsigned rgb) const;
 
+        void perform(Action a);
 		void events();
 		void update();
 		void draw();

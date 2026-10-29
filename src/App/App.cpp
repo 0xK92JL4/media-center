@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 23:14:48 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/10/29 11:16:16 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -15,12 +15,31 @@
 #include "Scene/HomeMenuScene.h"
 #include "Scene/ExtraMenuScene.h"
 
+#include <csignal>
+#include <cstdio>
+#include <cstring>
+#include <spawn.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+extern char** environ;
+
 namespace
 {
     constexpr int WINDOW_W = 1920;
     constexpr int WINDOW_H = 1080;
     constexpr int TEX_W    = 1920;
     constexpr int TEX_H    = 1080;
+
+    void spawn(char* const argv[])
+    {
+        pid_t pid;
+        int rc = posix_spawnp(&pid, argv[0], nullptr, nullptr, argv, environ);
+        if (rc != 0)
+        {
+            std::fprintf(stderr, "spawn %s: %s\n", argv[0], std::strerror(rc));
+        }
+    }
 }
 
 App::SdlContext::SdlContext()
@@ -96,6 +115,44 @@ void App::run()
     }
 }
 
+void App::perform(Action a)
+{
+    switch (a)
+    {
+        case Action::ToggleMenu:
+            loadScene(_menu == 1 ? 2 : 1);
+            break;
+
+        case Action::Exit:
+            _running = false;
+            break;
+
+        case Action::Shutdown:
+        {
+            char* argv[] = { (char*)"systemctl", (char*)"poweroff", nullptr };
+            spawn(argv);
+            _running = false;
+            break;
+        }
+
+        case Action::Browser:
+        {
+            char* argv[] = { (char*)"firefox", (char*)"--kiosk", nullptr };
+            spawn(argv);
+            break;
+        }
+
+        case Action::Search:
+        case Action::Continue:
+        case Action::Library:
+            std::fprintf(stderr, "Not implemented %d\n", static_cast<int>(a));
+            break;
+
+        case Action::None:
+            break;
+    }
+}
+
 void App::events()
 {
     SDL_Event e;
@@ -111,9 +168,10 @@ void App::events()
         }
         else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
         {
-            if (_scene->hitToggle(e.button.x, e.button.y))
+            Action a = _scene->hit(e.button.x, e.button.y);
+            if (a != Action::None)
             {
-                loadScene(_menu == 1 ? 2 : 1);
+                perform(a);
                 break;
             }
         }
@@ -122,6 +180,7 @@ void App::events()
 
 void App::update()
 {
+    while (waitpid(-1, nullptr, WNOHANG) > 0) {}
     _scene->update();
 }
 
