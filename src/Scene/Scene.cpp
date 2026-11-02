@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 20:36:38 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/29 11:09:59 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/02 13:02:28 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -26,35 +26,21 @@ namespace
     }
 }
 
-void Scene::add(SDL_Renderer* r,
-                const std::string& file,
-                const Box& b)
+void Scene::add(SDL_Renderer* r, const std::string& file, const Box& b)
 {
     Svg svg(asset(file));
 
-    const float scale = std::min(
-        b.w / svg.width(),
-        b.h / svg.height()
-    );
+    const float k     = OutputScale(r);
+    const float scale = std::min(b.w / svg.width(), b.h / svg.height());
 
-    const int pw = std::max(
-        1, static_cast<int>(std::lround(svg.width() * scale))
-    );
-
-    const int ph = std::max(
-        1, static_cast<int>(std::lround(svg.height() * scale))
-    );
-
-    const SDL_Rect dst = {
-        static_cast<int>(std::lround(b.x)),
-        static_cast<int>(std::lround(b.y)),
-        pw,
-        ph
-    };
+    const float lw = svg.width()  * scale;
+    const float lh = svg.height() * scale;
+    const int   pw = std::max(1, static_cast<int>(std::lround(lw * k)));
+    const int   ph = std::max(1, static_cast<int>(std::lround(lh * k)));
 
     _sprites.push_back(Sprite{
         svg.toTexture(r, pw, ph),
-        dst
+        SDL_FRect{ b.x, b.y, lw, lh }
     });
 }
 
@@ -92,7 +78,7 @@ void Scene::draw(SDL_Renderer* r) const
 {
     for (const Sprite& sprite : _sprites)
     {
-        SDL_RenderCopy(r, sprite.tex.get(), nullptr, &sprite.dst);
+        SDL_RenderCopyF(r, sprite.tex.get(), nullptr, &sprite.dst);
     }
     if (_clock)
     {

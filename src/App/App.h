@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:40 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/29 11:16:34 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/02 13:12:32 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -42,6 +42,10 @@ class App
 		RendererPtr            _renderer;
 		std::unique_ptr<Scene> _scene;
 		bool                   _running = true;
+
+		float _k = 1.0f;
+
+		void onResize();
 
 	public:
 		explicit App(int menu);

@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/27 20:36:29 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/29 11:09:15 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/02 13:01:20 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -16,6 +16,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 enum class Action
 {
@@ -31,7 +32,7 @@ class Scene
         struct Sprite
         {
             TexturePtr tex;
-            SDL_Rect dst;
+            SDL_FRect dst;
         };
 
         struct Button

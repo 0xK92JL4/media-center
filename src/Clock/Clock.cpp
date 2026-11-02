@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/28 11:55:54 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/28 14:30:51 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/02 13:03:45 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -17,18 +17,20 @@
 
 Clock::Clock(SDL_Renderer* r, const std::string& file,
              float x, float y, float w, float h)
-    : _x(static_cast<int>(std::lround(x))),
-      _y(static_cast<int>(std::lround(y)))
+    : _k(OutputScale(r))
 {
     Svg svg(file);
 
-    const float cell  = svg.width() / GLYPHS;
-    const float fit   = std::min(w / (5 * cell), h / svg.height());
+    _x = static_cast<int>(std::lround(x * _k));
+    _y = static_cast<int>(std::lround(y * _k));
+
+    const float cell = svg.width() / GLYPHS;
+    const float fit  = std::min(w * _k / (5 * cell), h * _k / svg.height());
 
     _cell = std::max(1, static_cast<int>(std::lround(cell * fit)));
     const float scale = _cell / cell;
 
-    _th = std::max(1, static_cast<int>(std::ceil(svg.height() * scale)));
+    _th  = std::max(1, static_cast<int>(std::ceil(svg.height() * scale)));
     _tex = svg.toTexture(r, _cell * GLYPHS, _th, scale);
     refresh();
 }
@@ -56,16 +58,15 @@ void Clock::update()
 
 void Clock::draw(SDL_Renderer* r) const
 {
-    const int startX = 1920 / 2 - (5 * _cell) / 2;
+    const int startX = static_cast<int>(std::lround(1920 * _k / 2)) - (5 * _cell) / 2;
 
     int i = 0;
     for (char c : _text)
     {
         const int g = (c == ':') ? 10 : c - '0';
-        const SDL_Rect src = { g * _cell, 0, _cell, _th };
-        const SDL_Rect dst = { startX + i * _cell, _y, _cell, _th };
-
-        SDL_RenderCopy(r, _tex.get(), &src, &dst);
+        const SDL_Rect  src = { g * _cell, 0, _cell, _th };
+        const SDL_FRect dst = { (startX + i * _cell) / _k, _y / _k, _cell / _k, _th / _k };
+        SDL_RenderCopyF(r, _tex.get(), &src, &dst);
         ++i;
     }
 }

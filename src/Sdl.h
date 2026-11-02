@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:55 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/26 11:45:56 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/02 13:00:06 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -38,4 +38,12 @@ using TexturePtr  = std::unique_ptr<SDL_Texture, TextureDel>;
 inline std::runtime_error SdlError(const std::string& what)
 {
     return std::runtime_error(what + ": " + SDL_GetError());
+}
+
+inline float OutputScale(SDL_Renderer* r)
+{
+    int w = 0, h = 0;
+    SDL_GetRendererOutputSize(r, &w, &h);
+    const float k = std::min(w / 1920.0f, h / 1080.0f);
+    return k < 1.0f ? 1.0f : k;
 }

@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/10/29 11:16:16 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/02 14:02:43 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -66,7 +66,8 @@ void App::initWindow()
 {
     _window.reset(SDL_CreateWindow("menu", SDL_WINDOWPOS_CENTERED,
                                    SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H,
-                                   SDL_WINDOW_RESIZABLE));
+                                   SDL_WINDOW_FULLSCREEN_DESKTOP |
+                                   SDL_WINDOW_ALLOW_HIGHDPI));
     if (!_window)
     {
         throw SdlError("SDL_CreateWindow");
@@ -97,6 +98,16 @@ void App::loadScene(int menu)
 
     _scene = std::move(next);
     _menu  = menu;
+    _k     = OutputScale(_renderer.get());
+}
+
+void App::onResize()
+{
+    const float k = OutputScale(_renderer.get());
+    if (std::fabs(k - _k) > 0.01f)
+    {
+        loadScene(_menu);
+    }
 }
 
 void App::setColor(unsigned rgb) const
@@ -174,6 +185,11 @@ void App::events()
                 perform(a);
                 break;
             }
+        }
+        else if (e.type == SDL_WINDOWEVENT &&
+                e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+        {
+            onResize();
         }
     }
 }
