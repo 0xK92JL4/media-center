@@ -13,7 +13,7 @@ class ThemeBuilder
 
   BATTERY_LEVELS = %w[20 40 60 80 100].freeze
 
-  FALLBACK_KEYS = %w[accent surface].freeze
+  FALLBACK_KEYS = %w[accent surface hover].freeze
   EXTERNAL_KEYS = %w[bg].freeze
 
   HEX_COLOR = /\A#[0-9a-fA-F]{6}\z/
@@ -164,22 +164,22 @@ class ThemeBuilder
     @used_keys << key
     color = colors[key]
 
-    if color.nil?
-      fallback = fallback_key(key)
-      if fallback
-        @used_keys << fallback
-        color = colors[fallback]
-      end
+    fallback_keys(key).each do |fallback|
+      break if color
+
+      @used_keys << fallback
+      color = colors[fallback]
     end
 
     color || raise(Error, "#{source}: no color configured for '#{key}'")
   end
 
-  def fallback_key(key)
-    return "accent" if key.end_with?("_icon", "_txt")
-    return "surface" if key.end_with?("_bg")
+  def fallback_keys(key)
+    return %w[hover accent] if key.end_with?("_hover")
+    return %w[accent]       if key.end_with?("_icon", "_txt")
+    return %w[surface]      if key.end_with?("_bg")
 
-    nil
+    []
   end
 
   def warn_unused_keys(defaults, themes)
