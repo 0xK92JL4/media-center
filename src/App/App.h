@@ -5,13 +5,14 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:40 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/11/02 13:12:32 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/03 11:31:03 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
 #pragma once
 
 #include "Scene/Scene.h"
+#include "Status/Status.h"
 #include "Sdl.h"
 #include <memory>
 
@@ -36,12 +37,13 @@ class App
 		void update();
 		void draw();
 
-        int                    _menu = 1;
-		SdlContext             _sdl;
-		WindowPtr              _window;
-		RendererPtr            _renderer;
-		std::unique_ptr<Scene> _scene;
-		bool                   _running = true;
+        int                             _menu = 1;
+		SdlContext                      _sdl;
+		WindowPtr                       _window;
+		RendererPtr                     _renderer;
+		std::unique_ptr<Scene>          _scene;
+        std::unique_ptr<StatusSource>   _status;
+		bool                            _running = true;
 
 		float _k = 1.0f;
 

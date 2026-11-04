@@ -5,7 +5,7 @@
 /*│  By: 0xK92JL4                                               ▒▒▒▒          │*/
 /*│                                                           ▒▒▒▒▒▒▒▒        │*/
 /*│  Created: 2026/10/26 11:45:25 by 0xK92JL4                 ▒▒▒▒▒▒▒▒        │*/
-/*│  Updated: 2026/11/02 14:02:43 by 0xK92JL4                 ▒▒    ▒▒        │*/
+/*│  Updated: 2026/11/04 23:15:46 by 0xK92JL4                 ▒▒    ▒▒        │*/
 /*│                                                                           │*/
 /*└───────────────────────────────────────────────────────────────────────────┘*/
 
@@ -57,6 +57,8 @@ App::SdlContext::~SdlContext()
 
 App::App(int menu)
 {
+    _status = std::make_unique<SysfsStatusSource>();
+
     initWindow();
     initRenderer();
     loadScene(menu);
@@ -186,6 +188,10 @@ void App::events()
                 break;
             }
         }
+        else if (e.type == SDL_MOUSEMOTION)
+        {
+            _scene->hover(e.motion.x, e.motion.y);
+        }
         else if (e.type == SDL_WINDOWEVENT &&
                 e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
         {
@@ -197,6 +203,7 @@ void App::events()
 void App::update()
 {
     while (waitpid(-1, nullptr, WNOHANG) > 0) {}
+    _scene->setStatus(_status->poll());
     _scene->update();
 }
 

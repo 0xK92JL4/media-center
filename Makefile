@@ -30,7 +30,7 @@ PKGS := sdl2
 
 CPPFLAGS += -isystem $(LIB_DIR) -I$(THEME_DIR) -Isrc
 CPPFLAGS += $(shell $(PKG_CONFIG) --cflags $(PKGS))
-CXXFLAGS += -std=c++17 -Wall -Wextra -Wpedantic -MMD -MP
+CXXFLAGS += -std=c++17 -Wall -Wextra -Wpedantic -MMD -MP -O3
 LDLIBS   += $(shell $(PKG_CONFIG) --libs $(PKGS))
 
 all: $(TARGET)

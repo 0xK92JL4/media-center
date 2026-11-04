@@ -4,6 +4,7 @@
 # Shared:
 #   accent      Fallback for unset icon/text colors
 #   surface     Fallback for unset button background
+#   hover       Fallback for unset hover color
 #   bg          Application background
 #   divider     Top bar divider
 #   clock       Clock display color
@@ -20,6 +21,7 @@
 # Action buttons (continue, search, library, browser, shutdown, exit):
 #   <action>_icon  Icon color
 #   <action>_txt   Label color
+#   <action>_hover Hover color
 #   <action>_bg    Background color
 #
 # Battery icons (20, 40, 60, 80, 100):
@@ -32,7 +34,7 @@
 #   Buttons: <action>_bg > surface
 #
 
-current: crimson
+current: dark_cherry
 
 default:
   menu_icon: "#94455d"
@@ -59,4 +61,32 @@ themes:
     bg: "#1d1118"
     divider: "#63303f"
     accent: "#edabb3"
+    hover: "#733e57"
     surface: "#321d27"
+
+  purple:
+    menu_icon: "#9878B9"
+    menu_txt: "#BEA0DE"
+    bg: "#191020"
+    divider: "#634477"
+    accent: "#D0B5EA"
+    hover: "#624477"
+    surface: "#2A1D38"
+
+  dark_cherry:
+    menu_icon: "#B45A75"
+    menu_txt: "#E58BA5"
+    bg: "#160B12"
+    divider: "#84364F"
+    accent: "#ffb5c6"
+    hover: "#71334D"
+    surface: "#351725"
+
+  dark_amethyst:
+    menu_icon: "#986BCB"
+    menu_txt: "#CBA5F2"
+    bg: "#120B19"
+    divider: "#674080"
+    accent: "#DDBEFF"
+    hover: "#633D80"
+    surface: "#291A32"
