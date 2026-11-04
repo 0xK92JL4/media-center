@@ -34,7 +34,7 @@
 #   Buttons: <action>_bg > surface
 #
 
-current: dark_cherry
+current: dark_gold
 
 default:
   menu_icon: "#94455d"
@@ -90,3 +90,12 @@ themes:
     accent: "#DDBEFF"
     hover: "#633D80"
     surface: "#291A32"
+
+  dark_gold:
+    menu_icon: "#D8B56E"
+    menu_txt: "#D8C09A"
+    bg: "#21170F"
+    divider: "#80603B"
+    accent: "#382516"
+    hover: "#EBCB83"
+    surface: "#B99152"
