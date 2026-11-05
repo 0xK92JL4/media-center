@@ -34,7 +34,7 @@
 #   Buttons: <action>_bg > surface
 #
 
-current: dark_gold
+current: dark_cherry
 
 default:
   menu_icon: "#94455d"
